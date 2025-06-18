@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Englannin Kielioppiharjoitukset</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            max-width: 100vw;
+            overflow-x: hidden;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #444;
+            flex-wrap: wrap;
+        }
+        nav a {
+            color: white;
+            padding: 15px 20px;
+            text-decoration: none;
+            display: block;
+            font-size: 1.08em;
+            border-bottom: 2px solid transparent;
+            transition: background 0.2s, border 0.2s;
+        }
+        nav a:hover, nav a.active-tab {
+            background-color: #555;
+            border-bottom: 2px solid #fff;
+        }
+        section {
+            margin: 24px auto;
+            padding: 24px 28px;
+            background-color: white;
+            border-radius: 10px;
+            max-width: 580px;
+            box-shadow: 0 4px 18px rgba(0,0,0,0.04);
+            display: none;
+        }
+        section.active {
+            display: block;
+            animation: fadeIn 0.3s;
+        }
+        h2 {
+            color: #333;
+            margin-top: 0;
+        }
+        h3 {
+            margin-bottom: 12px;
+            margin-top: 24px;
+        }
+        .instructions {
+            margin-bottom: 16px;
+            color: #222;
+            font-size: 1em;
+            background: #e7f5ff;
+            padding: 10px 14px;
+            border-radius: 6px;
+        }
+        .task {
+            margin-bottom: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .task label {
+            font-weight: normal;
+        }
+        .task input[type="text"],
+        .task select {
+            width: 100%;
+            max-width: 100%;
+            padding: 10px;
+            font-size: 1em;
+            border: 1px solid #bbb;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1.06em;
+            margin-top: 14px;
+            margin-bottom: 8px;
+            width: 100%;
+            box-sizing: border-box;
+            transition: background 0.2s;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            margin-top: 13px;
+            color: #222;
+            background: #f5f5f5;
+            padding: 10px 14px;
+            border-radius: 6px;
+            white-space: pre-line;
+            font-size: 1em;
+        }
+        hr {
+            border: none;
+            border-top: 1.5px solid #eee;
+            margin: 34px 0 24px 0;
+        }
+        .right { color: #198754; font-weight:bold;}
+        .wrong { color: #d9534f; font-weight:bold;}
+
+        @keyframes fadeIn {
+            from {opacity: 0;}
+            to {opacity: 1;}
+        }
+
+        @media (max-width: 700px) {
+            nav {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            nav a {
+                padding: 14px 8vw;
+                border-bottom: none;
+                border-left: 4px solid transparent;
+                font-size: 1.11em;
+            }
+            nav a:hover, nav a.active-tab {
+                background: #555;
+                border-left: 4px solid #fff;
+            }
+            section {
+                max-width: 99vw;
+                margin: 8vw 0;
+                padding: 20px 4vw;
+            }
+        }
+        @media (max-width: 460px) {
+            section {
+                padding: 12px 2vw;
+            }
+            .task input[type="text"], .task select, button {
+                font-size: 1em;
+                padding: 11px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Englannin Kielioppiharjoitukset</h1>
+</header>
+
+<nav id="navigation">
+    <a href="#" onclick="showSection('be-verb', event)" id="tab-be-verb">Be-verbi</a>
+    <a href="#" onclick="showSection('have-verb', event)" id="tab-have-verb">Have-verbi</a>
+    <a href="#" onclick="showSection('possessives', event)" id="tab-possessives">Omistusmuodot</a>
+    <a href="#" onclick="showSection('present-simple', event)" id="tab-present-simple">Yleispreesens</a>
+    <a href="#" onclick="showSection('verb-s', event)" id="tab-verb-s">Verbin s-pääte</a>
+    <a href="#" onclick="showSection('do-does', event)" id="tab-do-does">Do vai Does?</a>
+    <a href="#" onclick="showSection('questions', event)" id="tab-questions">Kysymyslauseet</a>
+    <a href="#" onclick="showSection('negations', event)" id="tab-negations">Kieltolauseet</a>
+</nav>
+
+<!-- BE-VERBI -->
+<section id="be-verb" class="section">
+    <h2>Be-verbi</h2>
+    <div class="instructions">Täydennä tai valitse oikea be-verbin muoto.</div>
+    <h3>Harjoitus 1</h3>
+    <div class="task"><label>1. I <select id="be-verb-1"><option value="">-</option><option>am</option><option>is</option><option>are</option></select> a student.</label></div>
+    <div class="task"><label>2. You <select id="be-verb-2"><option value="">-</option><option>am</option><option>is</option><option>are</option></select> my friend.</label></div>
+    <div class="task"><label>3. They <select id="be-verb-3"><option value="">-</option><option>am</option><option>is</option><option>are</option></select> happy.</label></div>
+    <div class="task"><label>4. She <select id="be-verb-4"><option value="">-</option><option>am</option><option>is</option><option>are</option></select> a teacher.</label></div>
+    <div class="task"><label>5. We <select id="be-verb-5"><option value="">-</option><option>am</option><option>is</option><option>are</option></select> tired.</label></div>
+    <div class="task"><label>6. He <select id="be-verb-6"><option value="">-</option><option>am</option><option>is</option><option>are</option></select> my brother.</label></div>
+    <div class="task"><label>7. I <select id="be-verb-7"><option value="">-</option><option>am</option><option>is</option><option>are</option></select> not sure.</label></div>
+    <div class="task"><label>8. They <select id="be-verb-8"><option value="">-</option><option>am</option><option>is</option><option>are</option></select> in the park.</label></div>
+    <div class="task"><label>9. We <select id="be-verb-9"><option value="">-</option><option>am</option><option>is</option><option>are</option></select> ready to go.</label></div>
+    <div class="task"><label>10. It <select id="be-verb-10"><option value="">-</option><option>am</option><option>is</option><option>are</option></select> a beautiful day.</label></div>
+    <button onclick="checkBeVerb()">Tarkista</button>
+    <div id="be-result" class="result"></div>
+    <hr>
+    <h3>Harjoitus 2</h3>
+    <div class="task"><label>1. This ___ my book.</label><input type="text" id="be-verb2-1"></div>
+    <div class="task"><label>2. The cat ___ on the table.</label><input type="text" id="be-verb2-2"></div>
+    <div class="task"><label>3. The children ___ in the garden.</label><input type="text" id="be-verb2-3"></div>
+    <div class="task"><label>4. We ___ friends.</label><input type="text" id="be-verb2-4"></div>
+    <div class="task"><label>5. I ___ hungry.</label><input type="text" id="be-verb2-5"></div>
+    <div class="task"><label>6. The sky ___ blue.</label><input type="text" id="be-verb2-6"></div>
+    <div class="task"><label>7. She ___ from Finland.</label><input type="text" id="be-verb2-7"></div>
+    <div class="task"><label>8. The dog ___ very old.</label><input type="text" id="be-verb2-8"></div>
+    <div class="task"><label>9. I ___ a teacher.</label><input type="text" id="be-verb2-9"></div>
+    <div class="task"><label>10. You ___ right!</label><input type="text" id="be-verb2-10"></div>
+    <button onclick="checkBeVerb2()">Tarkista</button>
+    <div id="be-result2" class="result"></div>
+</section>
+
+<!-- HAVE-VERBI -->
+<section id="have-verb" class="section">
+    <h2>Have-verbi</h2>
+    <div class="instructions">Täydennä oikea have-verbin muoto.</div>
+    <h3>Harjoitus 1</h3>
+    <div class="task"><label>1. She ___ a cat.</label><input type="text" id="have-verb-1"></div>
+    <div class="task"><label>2. We ___ a lot of books.</label><input type="text" id="have-verb-2"></div>
+    <div class="task"><label>3. They ___ two dogs.</label><input type="text" id="have-verb-3"></div>
+    <div class="task"><label>4. I ___ a question.</label><input type="text" id="have-verb-4"></div>
+    <div class="task"><label>5. He ___ many friends.</label><input type="text" id="have-verb-5"></div>
+    <div class="task"><label>6. We ___ a new car.</label><input type="text" id="have-verb-6"></div>
+    <div class="task"><label>7. You ___ any pets?</label><input type="text" id="have-verb-7"></div>
+    <div class="task"><label>8. They ___ a meeting tomorrow.</label><input type="text" id="have-verb-8"></div>
+    <div class="task"><label>9. I ___ no idea.</label><input type="text" id="have-verb-9"></div>
+    <div class="task"><label>10. She ___ a beautiful voice.</label><input type="text" id="have-verb-10"></div>
+    <button onclick="checkHaveVerb()">Tarkista</button>
+    <div id="have-result" class="result"></div>
+    <hr>
+    <h3>Harjoitus 2</h3>
+    <div class="task"><label>1. We ___ many apples.</label><input type="text" id="have-verb2-1"></div>
+    <div class="task"><label>2. Anna ___ a bike.</label><input type="text" id="have-verb2-2"></div>
+    <div class="task"><label>3. They ___ new shoes.</label><input type="text" id="have-verb2-3"></div>
+    <div class="task"><label>4. I ___ an idea.</label><input type="text" id="have-verb2-4"></div>
+    <div class="task"><label>5. My dad ___ a big car.</label><input type="text" id="have-verb2-5"></div>
+    <div class="task"><label>6. You ___ a nice family.</label><input type="text" id="have-verb2-6"></div>
+    <div class="task"><label>7. He ___ a dog.</label><input type="text" id="have-verb2-7"></div>
+    <div class="task"><label>8. She ___ a cold.</label><input type="text" id="have-verb2-8"></div>
+    <div class="task"><label>9. We ___ a big house.</label><input type="text" id="have-verb2-9"></div>
+    <div class="task"><label>10. They ___ many friends.</label><input type="text" id="have-verb2-10"></div>
+    <button onclick="checkHaveVerb2()">Tarkista</button>
+    <div id="have-result2" class="result"></div>
+</section>
+
+<!-- OMISTUSMUODOT -->
+<section id="possessives" class="section">
+    <h2>Omistusmuodot</h2>
+    <div class="instructions">Täydennä sopiva omistusmuoto. Muista katsoa kuka on tekijä.</div>
+    <h3>Harjoitus 1</h3>
+    <div class="task"><label>1. This is ___ book. (I)</label><input type="text" id="possessive-1"></div>
+    <div class="task"><label>2. That is ___ car. (she)</label><input type="text" id="possessive-2"></div>
+    <div class="task"><label>3. This is ___ house. (we)</label><input type="text" id="possessive-3"></div>
+    <div class="task"><label>4. Is this ___ pen? (you)</label><input type="text" id="possessive-4"></div>
+    <div class="task"><label>5. Is that ___ coat? (he)</label><input type="text" id="possessive-5"></div>
+    <div class="task"><label>6. This is ___ phone. (she)</label><input type="text" id="possessive-6"></div>
+    <div class="task"><label>7. Where is ___ notebook? (they)</label><input type="text" id="possessive-7"></div>
+    <div class="task"><label>8. This is ___ backpack. (I)</label><input type="text" id="possessive-8"></div>
+    <div class="task"><label>9. Those are ___ shoes. (we)</label><input type="text" id="possessive-9"></div>
+    <div class="task"><label>10. Is that ___ jacket? (you)</label><input type="text" id="possessive-10"></div>
+    <button onclick="checkPossessives()">Tarkista</button>
+    <div id="possessive-result" class="result"></div>
+    <hr>
+    <h3>Harjoitus 2</h3>
+    <div class="task"><label>1. This is ___ pen. (he)</label><input type="text" id="possessive2-1"></div>
+    <div class="task"><label>2. That is ___ dog. (we)</label><input type="text" id="possessive2-2"></div>
+    <div class="task"><label>3. Is this ___ cat? (you)</label><input type="text" id="possessive2-3"></div>
+    <div class="task"><label>4. This is ___ bag. (she)</label><input type="text" id="possessive2-4"></div>
+    <div class="task"><label>5. Where are ___ books? (they)</label><input type="text" id="possessive2-5"></div>
+    <div class="task"><label>6. Is this ___ car? (I)</label><input type="text" id="possessive2-6"></div>
+    <div class="task"><label>7. That is ___ brother. (he)</label><input type="text" id="possessive2-7"></div>
+    <div class="task"><label>8. Where is ___ phone? (she)</label><input type="text" id="possessive2-8"></div>
+    <div class="task"><label>9. These are ___ pencils. (we)</label><input type="text" id="possessive2-9"></div>
+    <div class="task"><label>10. Is that ___ house? (you)</label><input type="text" id="possessive2-10"></div>
+    <button onclick="checkPossessives2()">Tarkista</button>
+    <div id="possessive-result2" class="result"></div>
+</section>
+
+<!-- YLEISPREESENS -->
+<section id="present-simple" class="section">
+    <h2>Yleispreesens</h2>
+    <div class="instructions">Täydennä verbi preesensaikamuodossa. Katso kuka on tekijä.</div>
+    <h3>Harjoitus 1</h3>
+    <div class="task"><label>1. He ___ to school every day. <span style="color:#666;">(mennä)</span></label><input type="text" id="present-simple-1"></div>
+    <div class="task"><label>2. They ___ soccer in the park. <span style="color:#666;">(pelata)</span></label><input type="text" id="present-simple-2"></div>
+    <div class="task"><label>3. She ___ always on time. <span style="color:#666;">(olla)</span></label><input type="text" id="present-simple-3"></div>
+    <div class="task"><label>4. We ___ like pizza. <span style="color:#666;">(tykätä)</span></label><input type="text" id="present-simple-4"></div>
+    <div class="task"><label>5. He ___ not study French. <span style="color:#666;">(tehdä)</span></label><input type="text" id="present-simple-5"></div>
+    <div class="task"><label>6. I ___ read books in the evening. <span style="color:#666;">(lukea)</span></label><input type="text" id="present-simple-6"></div>
+    <div class="task"><label>7. They ___ play football on Sundays. <span style="color:#666;">(pelata)</span></label><input type="text" id="present-simple-7"></div>
+    <div class="task"><label>8. You ___ work on Saturdays. <span style="color:#666;">(tehdä töitä)</span></label><input type="text" id="present-simple-8"></div>
+    <div class="task"><label>9. She ___ visit her grandparents every weekend. <span style="color:#666;">(vierailla)</span></label><input type="text" id="present-simple-9"></div>
+    <div class="task"><label>10. We ___ not eat meat. <span style="color:#666;">(syödä)</span></label><input type="text" id="present-simple-10"></div>
+    <button onclick="checkPresentSimple()">Tarkista</button>
+    <div id="present-simple-result" class="result"></div>
+    <hr>
+    <h3>Harjoitus 2</h3>
+    <div class="task"><label>1. Tom ___ (play) the guitar.</label><input type="text" id="present-simple2-1"></div>
+    <div class="task"><label>2. We ___ (eat) breakfast at 7.</label><input type="text" id="present-simple2-2"></div>
+    <div class="task"><label>3. I ___ (walk) to school.</label><input type="text" id="present-simple2-3"></div>
+    <div class="task"><label>4. She ___ (read) a book every month.</label><input type="text" id="present-simple2-4"></div>
+    <div class="task"><label>5. They ___ (have) a new house.</label><input type="text" id="present-simple2-5"></div>
+    <div class="task"><label>6. We ___ (not watch) TV.</label><input type="text" id="present-simple2-6"></div>
+    <div class="task"><label>7. He ___ (like) school.</label><input type="text" id="present-simple2-7"></div>
+    <div class="task"><label>8. You ___ (visit) your uncle.</label><input type="text" id="present-simple2-8"></div>
+    <div class="task"><label>9. It ___ (rain) in autumn.</label><input type="text" id="present-simple2-9"></div>
+    <div class="task"><label>10. I ___ (not like) coffee.</label><input type="text" id="present-simple2-10"></div>
+    <button onclick="checkPresentSimple2()">Tarkista</button>
+    <div id="present-simple-result2" class="result"></div>
+</section>
+
+<!-- VERBIN S-PÄÄTE -->
+<section id="verb-s" class="section">
+    <h2>Verbin s-pääte</h2>
+    <div class="instructions">Täydennä oikea verbin muoto. Katso kuka on tekijä.</div>
+    <h3>Harjoitus 1</h3>
+    <div class="task"><label>1. She ___ (work) in a hospital.</label><input type="text" id="verb-s-1"></div>
+    <div class="task"><label>2. He ___ (study) English every day.</label><input type="text" id="verb-s-2"></div>
+    <div class="task"><label>3. It ___ (rain) a lot in April.</label><input type="text" id="verb-s-3"></div>
+    <div class="task"><label>4. She always ___ (arrive) early.</label><input type="text" id="verb-s-4"></div>
+    <div class="task"><label>5. He ___ (like) playing football.</label><input type="text" id="verb-s-5"></div>
+    <div class="task"><label>6. My brother ___ (play) the guitar.</label><input type="text" id="verb-s-6"></div>
+    <div class="task"><label>7. She ___ (speak) three languages.</label><input type="text" id="verb-s-7"></div>
+    <div class="task"><label>8. They ___ (live) in London.</label><input type="text" id="verb-s-8"></div>
+    <div class="task"><label>9. I ___ (enjoy) watching movies.</label><input type="text" id="verb-s-9"></div>
+    <div class="task"><label>10. She ___ (teach) English at a school.</label><input type="text" id="verb-s-10"></div>
+    <button onclick="checkVerbS()">Tarkista</button>
+    <div id="verb-s-result" class="result"></div>
+    <hr>
+    <h3>Harjoitus 2</h3>
+    <div class="task"><label>1. She ___ (run) fast.</label><input type="text" id="verb-s2-1"></div>
+    <div class="task"><label>2. We ___ (sing) well.</label><input type="text" id="verb-s2-2"></div>
+    <div class="task"><label>3. He ___ (open) the window.</label><input type="text" id="verb-s2-3"></div>
+    <div class="task"><label>4. They ___ (play) chess.</label><input type="text" id="verb-s2-4"></div>
+    <div class="task"><label>5. I ___ (speak) German.</label><input type="text" id="verb-s2-5"></div>
+    <div class="task"><label>6. She ___ (like) dogs.</label><input type="text" id="verb-s2-6"></div>
+    <div class="task"><label>7. We ___ (watch) TV in the evening.</label><input type="text" id="verb-s2-7"></div>
+    <div class="task"><label>8. He ___ (finish) his homework.</label><input type="text" id="verb-s2-8"></div>
+    <div class="task"><label>9. You ___ (study) English.</label><input type="text" id="verb-s2-9"></div>
+    <div class="task"><label>10. They ___ (walk) to school.</label><input type="text" id="verb-s2-10"></div>
+    <button onclick="checkVerbS2()">Tarkista</button>
+    <div id="verb-s-result2" class="result"></div>
+</section>
+
+<!-- DO VAI DOES -->
+<section id="do-does" class="section">
+    <h2>Do vai Does?</h2>
+    <div class="instructions">Täydennä joko "do" tai "does".</div>
+    <h3>Harjoitus 1</h3>
+    <div class="task"><label>1. ___ you like coffee?</label><input type="text" id="do-does-1"></div>
+    <div class="task"><label>2. I ___ not like tomatoes.</label><input type="text" id="do-does-2"></div>
+    <div class="task"><label>3. He ___ play the piano.</label><input type="text" id="do-does-3"></div>
+    <div class="task"><label>4. She ___ speak French.</label><input type="text" id="do-does-4"></div>
+    <div class="task"><label>5. ___ they have a dog?</label><input type="text" id="do-does-5"></div>
+    <div class="task"><label>6. We ___ go to the park every day.</label><input type="text" id="do-does-6"></div>
+    <div class="task"><label>7. You ___ like watching TV.</label><input type="text" id="do-does-7"></div>
+    <div class="task"><label>8. She ___ go to the gym every evening.</label><input type="text" id="do-does-8"></div>
+    <div class="task"><label>9. I ___ not have any pets.</label><input type="text" id="do-does-9"></div>
+    <div class="task"><label>10. ___ he go to work by bus?</label><input type="text" id="do-does-10"></div>
+    <button onclick="checkDoDoes()">Tarkista</button>
+    <div id="do-does-result" class="result"></div>
+    <hr>
+    <h3>Harjoitus 2</h3>
+    <div class="task"><label>1. ___ she play tennis?</label><input type="text" id="do-does2-1"></div>
+    <div class="task"><label>2. ___ you like pizza?</label><input type="text" id="do-does2-2"></div>
+    <div class="task"><label>3. ___ your brother go to school?</label><input type="text" id="do-does2-3"></div>
+    <div class="task"><label>4. ___ they speak French?</label><input type="text" id="do-does2-4"></div>
+    <div class="task"><label>5. ___ Anna work here?</label><input type="text" id="do-does2-5"></div>
+    <div class="task"><label>6. ___ I need a ticket?</label><input type="text" id="do-does2-6"></div>
+    <div class="task"><label>7. ___ he read English books?</label><input type="text" id="do-does2-7"></div>
+    <div class="task"><label>8. ___ we have homework?</label><input type="text" id="do-does2-8"></div>
+    <div class="task"><label>9. ___ your friends live here?</label><input type="text" id="do-does2-9"></div>
+    <div class="task"><label>10. ___ she like cats?</label><input type="text" id="do-does2-10"></div>
+    <button onclick="checkDoDoes2()">Tarkista</button>
+    <div id="do-does-result2" class="result"></div>
+</section>
+
+<!-- KYSYMYSLAUSEET -->
+<section id="questions" class="section">
+    <h2>Kysymyslauseet</h2>
+    <div class="instructions">Muuta lauseet kysymyslauseiksi.</div>
+    <h3>Harjoitus 1</h3>
+    <div class="task"><label>1. You are coming to the party. -> ___ you coming to the party?</label><input type="text" id="questions-1"></div>
+    <div class="task"><label>2. She plays the piano. -> ___ she play the piano?</label><input type="text" id="questions-2"></div>
+    <div class="task"><label>3. They are friends. -> ___ they friends?</label><input type="text" id="questions-3"></div>
+    <div class="task"><label>4. He likes ice cream. -> ___ he like ice cream?</label><input type="text" id="questions-4"></div>
+    <div class="task"><label>5. You are going to the store. -> ___ you going to the store?</label><input type="text" id="questions-5"></div>
+    <div class="task"><label>6. She lives in London. -> ___ she live in London?</label><input type="text" id="questions-6"></div>
+    <div class="task"><label>7. They have a car. -> ___ they have a car?</label><input type="text" id="questions-7"></div>
+    <div class="task"><label>8. You are happy. -> ___ you happy?</label><input type="text" id="questions-8"></div>
+    <div class="task"><label>9. We play soccer. -> ___ we play soccer?</label><input type="text" id="questions-9"></div>
+    <div class="task"><label>10. He goes to school. -> ___ he go to school?</label><input type="text" id="questions-10"></div>
+    <button onclick="checkQuestions()">Tarkista</button>
+    <div id="questions-result" class="result"></div>
+    <hr>
+    <h3>Harjoitus 2</h3>
+    <div class="task"><label>1. I am late.</label><input type="text" id="questions2-1"></div>
+    <div class="task"><label>2. He likes pizza.</label><input type="text" id="questions2-2"></div>
+    <div class="task"><label>3. You are my friend.</label><input type="text" id="questions2-3"></div>
+    <div class="task"><label>4. She speaks French.</label><input type="text" id="questions2-4"></div>
+    <div class="task"><label>5. They are in the park.</label><input type="text" id="questions2-5"></div>
+    <div class="task"><label>6. We play football.</label><input type="text" id="questions2-6"></div>
+    <div class="task"><label>7. He goes to school.</label><input type="text" id="questions2-7"></div>
+    <div class="task"><label>8. It is raining.</label><input type="text" id="questions2-8"></div>
+    <div class="task"><label>9. She visits her grandma.</label><input type="text" id="questions2-9"></div>
+    <div class="task"><label>10. You are right.</label><input type="text" id="questions2-10"></div>
+    <button onclick="checkQuestions2()">Tarkista</button>
+    <div id="questions-result2" class="result"></div>
+</section>
+
+<!-- KIELTOLAUSEET -->
+<section id="negations" class="section">
+    <h2>Kieltolauseet</h2>
+    <div class="instructions">Täydennä oikea sana/sanat, jotta lauseesta tulee järkevä kieltolause.</div>
+    <h3>Harjoitus 1</h3>
+    <div class="task"><label>1. He ___ (not) like pizza.</label><input type="text" id="negation-1"></div>
+    <div class="task"><label>2. They ___ (not) watch TV.</label><input type="text" id="negation-2"></div>
+    <div class="task"><label>3. I ___ (not) want to go.</label><input type="text" id="negation-3"></div>
+    <div class="task"><label>4. She ___ (not) like coffee.</label><input type="text" id="negation-4"></div>
+    <div class="task"><label>5. We ___ (not) have time.</label><input type="text" id="negation-5"></div>
+    <div class="task"><label>6. They ___ (not) go to the party.</label><input type="text" id="negation-6"></div>
+    <div class="task"><label>7. He ___ (not) play the guitar.</label><input type="text" id="negation-7"></div>
+    <div class="task"><label>8. You ___ (not) speak German.</label><input type="text" id="negation-8"></div>
+    <div class="task"><label>9. She ___ (not) work on Sundays.</label><input type="text" id="negation-9"></div>
+    <div class="task"><label>10. We ___ (not) eat meat.</label><input type="text" id="negation-10"></div>
+    <button onclick="checkNegations()">Tarkista</button>
+    <div id="negation-result" class="result"></div>
+    <hr>
+    <h3>Harjoitus 2</h3>
+    <div class="task"><label>1. He ___ (not) like dogs.</label><input type="text" id="negation2-1"></div>
+    <div class="task"><label>2. I ___ (not) know.</label><input type="text" id="negation2-2"></div>
+    <div class="task"><label>3. She ___ (not) play tennis.</label><input type="text" id="negation2-3"></div>
+    <div class="task"><label>4. We ___ (not) understand.</label><input type="text" id="negation2-4"></div>
+    <div class="task"><label>5. They ___ (not) come today.</label><input type="text" id="negation2-5"></div>
+    <div class="task"><label>6. You ___ (not) speak Finnish.</label><input type="text" id="negation2-6"></div>
+    <div class="task"><label>7. He ___ (not) eat meat.</label><input type="text" id="negation2-7"></div>
+    <div class="task"><label>8. She ___ (not) work here.</label><input type="text" id="negation2-8"></div>
+    <div class="task"><label>9. We ___ (not) go to school.</label><input type="text" id="negation2-9"></div>
+    <div class="task"><label>10. I ___ (not) like tea.</label><input type="text" id="negation2-10"></div>
+    <button onclick="checkNegations2()">Tarkista</button>
+    <div id="negation-result2" class="result"></div>
+</section>
+
+<script>
+    // Aktiivinen välilehti automaattisesti
+    document.addEventListener("DOMContentLoaded", function() {
+        showSection('be-verb');
+    });
+
+    function showSection(sectionId, evt) {
+        let sections = document.querySelectorAll('.section');
+        sections.forEach(section => section.classList.remove('active'));
+        document.getElementById(sectionId).classList.add('active');
+        // Vaihda aktiivinen tab
+        let tabs = document.querySelectorAll('nav a');
+        tabs.forEach(tab => tab.classList.remove('active-tab'));
+        let activeTab = document.getElementById('tab-' + sectionId);
+        if (activeTab) activeTab.classList.add('active-tab');
+    }
+
+    // Tehtävien tarkistukset, oikeat vastaukset ja selitteet
+    function showResultWithCorrect(answers, ids, resultId, corrects, alt=[]) {
+        let correct = 0, txt = "";
+        for(let i=0;i<answers.length;i++) {
+            let user = (document.getElementById(ids[i]).value || '').trim().toLowerCase();
+            let cor = corrects[i];
+            let ok = (Array.isArray(cor) ? cor : [cor]).some(val=>user === val);
+            if(!ok && alt[i] && alt[i].length)
+                ok = alt[i].some(val=>user === val);
+            if(ok) {
+                correct++;
+                txt += `<span class="right">${i+1}. ${user}</span> (Oikea vastaus: ${Array.isArray(cor)?cor[0]:cor})\n`;
+            } else {
+                let correctShow = Array.isArray(cor)?cor[0]:cor;
+                txt += `<span class="wrong">${i+1}. ${user}</span> (Oikea vastaus: ${correctShow})\n`;
+            }
+        }
+        document.getElementById(resultId).innerHTML = `Oikein: ${correct}/${answers.length}\n\n${txt}`;
+    }
+
+    // Be-verbi
+    function checkBeVerb() {
+        showResultWithCorrect(
+            Array.from({length:10},(_,i)=>''), 
+            Array.from({length:10},(_,i)=>`be-verb-${i+1}`), 
+            "be-result", 
+            ["am","are","are","is","are","is","am","are","are","is"]
+        );
+    }
+    function checkBeVerb2() {
+        showResultWithCorrect(
+            Array.from({length:10},(_,i)=>''), 
+            Array.from({length:10},(_,i)=>`be-verb2-${i+1}`), 
+            "be-result2", 
+            ["is","is","are","are","am","is","is","is","am","are"]
+        );
+    }
+    // Have-verbi
+    function checkHaveVerb() {
+        showResultWithCorrect(
+            Array.from({length:10},(_,i)=>''), 
+            Array.from({length:10},(_,i)=>`have-verb-${i+1}`), 
+            "have-result", 
+            ["has","have","have","have","has","have","do","have","have","has"]
+        );
+    }
+    function checkHaveVerb2() {
+        showResultWithCorrect(
+            Array.from({length:10},(_,i)=>''), 
+            Array.from({length:10},(_,i)=>`have-verb2-${i+1}`), 
+            "have-result2", 
+            ["have","has","have","have","has","have","has","has","have","have"]
+        );
+    }
+    // Possessives
+    function checkPossessives() {
+        showResultWithCorrect(
+            Array.from({length:10},(_,i)=>''), 
+            Array.from({length:10},(_,i)=>`possessive-${i+1}`), 
+            "possessive-result", 
+            ["my","her","our","your","his","her","their","my","our","your"]
+        );
+    }
+    function checkPossessives2() {
+        showResultWithCorrect(
+            Array.from({length:10},(_,i)=>''), 
+            Array.from({length:10},(_,i)=>`possessive2-${i+1}`), 
+            "possessive-result2", 
+            ["his","our","your","her","their","my","his","her","our","your"]
+        );
+    }
+    // Yleispreesens
+    function checkPresentSimple() {
+        showResultWithCorrect(
+            Array.from({length:10},(_,i)=>''), 
+            Array.from({length:10},(_,i)=>`present-simple-${i+1}`), 
+            "present-simple-result", 
+            ["goes","play","is","like","does","read","play","work","visits","eat"],
+            [[],[],[],[],["does not","doesn't"],[],[],[],[],["do not","don't"]]
+        );
+    }
+    function checkPresentSimple2() {
+        showResultWithCorrect(
+            Array.from({length:10},(_,i)=>''), 
+            Array.from({length:10},(_,i)=>`present-simple2-${i+1}`), 
+            "present-simple-result2", 
+            ["plays","eat","walk","reads","have",["do not watch","don't watch"],"likes","visit","rains",["do not like","don't like"]]
+        );
+    }
+    // Verbin s-pääte
+    function checkVerbS() {
+        showResultWithCorrect(
+            Array.from({length:10},(_,i)=>''), 
+            Array.from({length:10},(_,i)=>`verb-s-${i+1}`), 
+            "verb-s-result", 
+            ["works","studies","rains","arrives","likes","plays","speaks","live","enjoy","teaches"]
+        );
+    }
+    function checkVerbS2() {
+        showResultWithCorrect(
+            Array.from({length:10},(_,i)=>''), 
+            Array.from({length:10},(_,i)=>`verb-s2-${i+1}`), 
+            "verb-s-result2", 
+            ["runs","sing","opens","play","speak","likes","watch","finishes","study","walk"]
+        );
+    }
+    // Do/Does
+    function checkDoDoes() {
+        showResultWithCorrect(
+            Array.from({length:10},(_,i)=>''), 
+            Array.from({length:10},(_,i)=>`do-does-${i+1}`), 
+            "do-does-result", 
+            ["do","do","does","does","do","do","do","does","do","does"]
+        );
+    }
+    function checkDoDoes2() {
+        showResultWithCorrect(
+            Array.from({length:10},(_,i)=>''), 
+            Array.from({length:10},(_,i)=>`do-does2-${i+1}`), 
+            "do-does-result2", 
+            ["does","do","does","do","does","do","does","do","do","does"]
+        );
+    }
+    // Kysymyslauseet
+    function checkQuestions() {
+        showResultWithCorrect(
+            Array.from({length:10},(_,i)=>''), 
+            Array.from({length:10},(_,i)=>`questions-${i+1}`), 
+            "questions-result", 
+            ["are","does","are","does","are","does","do","are","do","does"]
+        );
+    }
+    function checkQuestions2() {
+        let corrects = [
+            "Am I late?",
+            "Does he like pizza?",
+            "Are you my friend?",
+            "Does she speak French?",
+            "Are they in the park?",
+            "Do we play football?",
+            "Does he go to school?",
+            "Is it raining?",
+            "Does she visit her grandma?",
+            "Are you right?"
+        ];
+        let ids = Array.from({length:10},(_,i)=>`questions2-${i+1}`);
+        let correct = 0, txt = "";
+        for(let i=0;i<10;i++) {
+            let user = (document.getElementById(ids[i]).value||'').trim().replace(/\s+/g,' ').replace(/\s*\?*$/,'?');
+            let cor = corrects[i];
+            if(user.toLowerCase() === cor.toLowerCase()) {
+                correct++;
+                txt += `<span class="right">${i+1}. ${user}</span> (Oikea vastaus: ${cor})\n`;
+            } else {
+                txt += `<span class="wrong">${i+1}. ${user}</span> (Oikea vastaus: ${cor})\n`;
+            }
+        }
+        document.getElementById("questions-result2").innerHTML = `Oikein: ${correct}/10\n\n${txt}`;
+    }
+    // Kieltolauseet
+    function checkNegations() {
+        showResultWithCorrect(
+            Array.from({length:10},(_,i)=>''), 
+            Array.from({length:10},(_,i)=>`negation-${i+1}`), 
+            "negation-result", 
+            [["does not","doesn't"],["do not","don't"],["do not","don't"],["does not","doesn't"],["do not","don't"],["do not","don't"],["does not","doesn't"],["do not","don't"],["does not","doesn't"],["do not","don't"]]
+        );
+    }
+    function checkNegations2() {
+        showResultWithCorrect(
+            Array.from({length:10},(_,i)=>''), 
+            Array.from({length:10},(_,i)=>`negation2-${i+1}`), 
+            "negation-result2", 
+            [["does not","doesn't"],["do not","don't"],["does not","doesn't"],["do not","don't"],["do not","don't"],["do not","don't"],["does not","doesn't"],["does not","doesn't"],["do not","don't"],["do not","don't"]]
+        );
+    }
+</script>
+
+</body>
+</html>
